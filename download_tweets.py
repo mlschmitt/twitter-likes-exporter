@@ -43,7 +43,7 @@ class TweetDownloader():
         response = requests.get(
             likes_url,
             params={"variables": variables_data_encoded, "features": features_data_encoded},
-            headers=headers
+            headers=self.likes_request_headers()
         )
         return self.extract_likes_entries(response.json())
 
