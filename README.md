@@ -2,6 +2,8 @@
 
 Hacky Python scripts for downloading your Twitter likes and converting to HTML. Includes support for downloading user avatars and image media in tweets. Uses the GraphQL API powering Twitter.com, the equivalent of you scrolling through all your likes in your web browser.
 
+![example output rendered html of tweets](example_html_output.png)
+
 Note only currently supports grabbing the liked tweet. So if it was a quote tweet, does not download the RT'd tweet. If it's a reply or part of a thread, does not download the other tweets.
 
 Meant to jumpstart you to at least getting your tweets offline from Twitter, if not building something much better!
@@ -77,6 +79,4 @@ NOTE: This will attempt to download all media images and tweet author avatars lo
 python parse_tweets_json_to_html.py
 ```
 
-This will download all images and construct an `index.html` file containing all the liked tweets.
-
-![example output rendered html of tweets](example_html_output.png)
+This will download all images (if specified; saved to `tweet_likes_html/images`) and construct an HTML file at `tweet_likes_html/index.html` containing all liked tweets.
