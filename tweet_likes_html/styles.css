@@ -1,0 +1,90 @@
+body {
+     background-color:#eee;
+     padding:20px;
+     font-family:Helvetica;
+}
+ .tweet_list {
+     width:100%;
+}
+ .tweet_wrapper {
+     width:95%;
+     display:inline-block;
+     padding-top:15px;
+     padding-bottom:15px;
+     padding-left:2%;
+     padding-right:2%;
+     border:1px solid #ccc;
+     margin-bottom:30px;
+     background-color:#fff;
+}
+ .tweet_author_wrapper {
+     width:100%;
+     display:inline-block;
+     vertical-align:top;
+     min-height:48px;
+}
+ .tweet_author_image {
+     width:48px;
+     height:48px;
+     display:inline-block;
+     border-radius:24px;
+     overflow:hidden;
+     border:1px solid #ccc;
+}
+ .author_context {
+     display:inline-block;
+     margin-top:5px;
+     margin-left:10px;
+     vertical-align:top;
+}
+ .tweet_author_handle {
+     display:inline-block;
+     font-size:0.8em;
+     width:100%;
+}
+ .tweet_author_handle, .tweet_author_handle a {
+     color:#95a5a6;
+}
+ .tweet_author_name {
+     font-weight:bold;
+     font-size:0.9em;
+     width:100%;
+}
+ .tweet_content {
+     width:100%;
+     margin-top:15px;
+     margin-bottom:15px;
+     display:inline-block;
+     font-size:1.0em;
+}
+ .tweet_created_at {
+     width:100%;
+     display:inline-block;
+     font-size:0.9em;
+     color:#95a5a6;
+}
+ .twitter_link {
+     width:100%;
+     display:inline-block;
+}
+ .twitter_link, .twitter_link a {
+     font-size:0.9em;
+     color:#3498db;
+}
+ .tweet_images_wrapper {
+     width:100%;
+     margin-bottom:25px;
+     margin-top:10px;
+     display:inline-block;
+}
+ .tweet_images_wrapper .tweet_image {
+     display:inline-block;
+     margin-right:15px;
+     margin-top:15px;
+     overflow:hidden;
+}
+ .tweet_images_wrapper .tweet_image img {
+     max-height:200px;
+     max-width:400px;
+}
+ 

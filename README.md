@@ -36,7 +36,47 @@ Run as follows:
 python download_tweets.py
 ```
 
+Should provide output like the following:
+
+```bash
+Starting retrieval of likes for Twitter user 1234...
+Fetching likes page: 1...
+Fetching likes page: 2...
+Fetching likes page: 3...
+Done. Likes JSON saved to: liked_tweets.json
+```
+
+The output JSON will be a list of dictionaries like the following:
+
+```json
+[
+   {
+      "tweet_id": "780770946428829696",
+      "user_id": "265447323",
+      "user_handle": "LeahTiscione",
+      "user_name": "Leah Tiscione",
+      "user_avatar_url": "https://pbs.twimg.com/profile_images/1563330281838284805/aUtIY2vj_normal.jpg",
+      "tweet_content":"What are you hiding in your locked instagram? sandwiches? Sunsets???? let us see your nephew!!!!",
+      "tweet_media_urls": [],
+      "tweet_created_at": "Sun Mar 13 15:16:45 +0000 2011"
+   }
+]
+```
+
 
 ### Convert JSON Likes to HTML
 
-WIP
+If you want your tweets as a local HTML file, you can run the second script to convert the output JSON file from the above step.
+
+NOTE: This will attempt to download all media images and tweet author avatars locally by default to avoid relying on Twitter hosting. You can override this by changing the `DOWNLOAD_IMAGES` boolean in `config.json` to `false`.
+
+1. Be sure the `OUTPUT_JSON_FILE_PATH` value in `config.json` is pointing to the output JSON file of your tweets.
+2. Run:
+
+```bash
+python parse_tweets_json_to_html.py
+```
+
+This will download all images and construct an `index.html` file containing all the liked tweets.
+
+![example output rendered html of tweets](example_html_output.png)

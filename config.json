@@ -3,5 +3,6 @@
     "HEADER_AUTHORIZATION": "Bearer SOME_AUTH_TOKEN",
     "HEADER_COOKIES": "cookies_from_request",
     "HEADER_CSRF": "csrf_from_request",
-    "OUTPUT_JSON_FILE_PATH": "liked_tweets.json"
+    "OUTPUT_JSON_FILE_PATH": "liked_tweets.json",
+    "DOWNLOAD_IMAGES": true
 }
