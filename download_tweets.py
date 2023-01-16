@@ -2,17 +2,19 @@ import configparser
 import json
 import requests
 
+from tweet_parser import TweetParser
+
 class TweetDownloader():
 
     def __init__(self):
-        # Load in user specific data from .env file
-        config = configparser.ConfigParser()
-        config.read('.env')
-        self.twitter_user_id = config.get('TWITTER', 'USER_ID')
-        self.header_authorization = config.get('TWITTER', 'HEADER_AUTHORIZATION')
-        self.header_cookie = config.get('TWITTER', 'HEADER_COOKIES')
-        self.header_csrf = config.get('TWITTER', 'HEADER_CSRF')
-        self.output_json_file_path = config.get('TWITTER', 'OUTPUT_JSON_FILE_PATH')
+        # Load in user specific data from config.json file
+        with open("config.json") as json_data_file:
+            config_data = json.load(json_data_file)
+            self.twitter_user_id = config_data.get('USER_ID')
+            self.header_authorization = config_data.get('HEADER_AUTHORIZATION')
+            self.header_cookie = config_data.get('HEADER_COOKIES')
+            self.header_csrf = config_data.get('HEADER_CSRF')
+            self.output_json_file_path = config_data.get('OUTPUT_JSON_FILE_PATH')
 
     def retrieve_all_likes(self):
         all_tweets = []
@@ -26,12 +28,12 @@ class TweetDownloader():
             print(f"Fetching likes page: {current_page}...")
             current_page += 1
             for raw_tweet in likes_page:
-                output_tweet = parse_tweet(raw_tweet)
-                if output_tweet:
-                    all_tweets.append(output_tweet)
+                tweet_parser = TweetParser(raw_tweet)
+                if tweet_parser.is_valid_tweet:
+                    all_tweets.append(tweet_parser.tweet_as_json())
             old_page_cursor = page_cursor
-            likes_page = get_likes(cursor=page_cursor)
-            page_cursor = get_cursor(likes_page)
+            likes_page = self.retrieve_likes_page(cursor=page_cursor)
+            page_cursor = self.get_cursor(likes_page)
 
         with open(self.output_json_file_path, 'w') as f:
             f.write(json.dumps(all_tweets))
