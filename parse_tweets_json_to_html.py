@@ -59,12 +59,29 @@ class ParseTweetsJSONtoHTML():
 
         parsed_datetime = datetime.datetime.strptime(tweet_data['tweet_created_at'], "%a %b %d %H:%M:%S +0000 %Y")
         output_html += f"<div class='tweet_created_at'>{parsed_datetime.strftime('%m/%d/%Y %I:%M%p')}</div>"
-        output_html += f"<div class='twitter_link'><a href='https://www.twitter.com/{tweet_data['user_handle']}/status/{tweet_data['tweet_id']}/' target='_blank'>Original tweet &#8599;</a></div>"
+        output_html += "<div class='twitter_link'>"
+        output_html += f"<a href='https://www.twitter.com/{tweet_data['user_handle']}/status/{tweet_data['tweet_id']}/' target='_blank'>Original tweet &#8599;</a> &#8226; "
+        individual_tweet_file_path = f"{self.output_html_directory}/tweets/{tweet_data['tweet_id']}.html"
+        output_html += f"<a href='tweets/{tweet_data['tweet_id']}.html' target='_blank'>Local version</a>"
+        output_html += "</div>"
 
         output_html += "</div>\n\n"
+
+        
+        with open(individual_tweet_file_path, 'w') as individual_tweet_file:
+            individual_tweet_file.write('<html><head><title>Liked Tweets Export</title>')
+            individual_tweet_file.write('<link rel="stylesheet" href="../styles.css"></head>')
+            individual_tweet_file.write('<body><div class="tweet_list">')
+            adjusted_html = output_html.replace("images/avatars", "../images/avatars")
+            adjusted_html = adjusted_html.replace("images/tweets", "../images/tweets")
+            individual_tweet_file.write(adjusted_html)
+            individual_tweet_file.write('</div></body></html>')
+
         return output_html
 
     def save_remote_image(self, remote_url, local_path):
+        if os.path.exists(local_path):
+            return
         print(f"Downloading image {remote_url}...")
         img_data = requests.get(remote_url).content
         with open(local_path, 'wb') as handler:

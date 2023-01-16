@@ -1,6 +1,6 @@
 # Twitter Likes Exporter
 
-Hacky Python scripts for downloading your Twitter likes and converting to HTML. Includes support for downloading user avatars and image media in tweets. Uses the GraphQL API powering Twitter.com, the equivalent of you scrolling through all your likes in your web browser.
+Hacky Python scripts for downloading your Twitter likes and converting to HTML. Includes support for downloading user avatars and image media in tweets. Scrapes tweets using the GraphQL API powering Twitter.com - the equivalent of you scrolling through all your likes in your web browser, only saved locally forever!
 
 ![example output rendered html of tweets](example_html_output.png)
 
@@ -79,4 +79,4 @@ NOTE: This will attempt to download all media images and tweet author avatars lo
 python parse_tweets_json_to_html.py
 ```
 
-This will download all images (if specified; saved to `tweet_likes_html/images`) and construct an HTML file at `tweet_likes_html/index.html` containing all liked tweets.
+This will download all images (if specified; saved to `tweet_likes_html/images`) and construct an HTML file at `tweet_likes_html/index.html` containing all liked tweets, as well as individual HTML files within `tweet_likes_html/tweets/`.
