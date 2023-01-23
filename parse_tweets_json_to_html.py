@@ -15,7 +15,9 @@ class ParseTweetsJSONtoHTML():
 
     def write_tweets_to_html(self):
         with open(self.output_index_path, 'w') as output_html:
-            output_html.write('<html><head><title>Liked Tweets Export</title>')
+            output_html.write('<html><head>')
+            output_html.write('<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0" />')
+            output_html.write('<title>Liked Tweets Export</title>')
             output_html.write('<link rel="stylesheet" href="styles.css"></head>')
             output_html.write('<body><h1>Liked Tweets</h1><div class="tweet_list">')
             for tweet_data in self.tweets_as_json:
