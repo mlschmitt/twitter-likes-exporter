@@ -1,6 +1,7 @@
 class TweetParser():
     def __init__(self, raw_tweet_json):
         self.is_valid_tweet = True
+        self.raw_tweet_json = raw_tweet_json
         self._media_urls = None
 
         if not raw_tweet_json["content"].get("itemContent", None):
@@ -12,6 +13,7 @@ class TweetParser():
             self.is_valid_tweet = False
 
     def tweet_as_json(self):
+        print(self.tweet_created_at)
         return {
             "tweet_id": self.tweet_id,
             "user_id": self.user_id,
@@ -33,7 +35,7 @@ class TweetParser():
 
     @property
     def tweet_created_at(self):
-        return self.key_data["core"]["user_results"]["result"]["legacy"]["created_at"]
+        return self.key_data["legacy"]["created_at"]
 
     @property
     def user_id(self):
