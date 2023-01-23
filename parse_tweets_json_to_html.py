@@ -71,7 +71,9 @@ class ParseTweetsJSONtoHTML():
 
         
         with open(individual_tweet_file_path, 'w') as individual_tweet_file:
-            individual_tweet_file.write('<html><head><title>Liked Tweets Export</title>')
+            individual_tweet_file.write('<html><head>')
+            individual_tweet_file.write('<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0" />')
+            individual_tweet_file.write('<title>Liked Tweets Export</title>')
             individual_tweet_file.write('<link rel="stylesheet" href="../styles.css"></head>')
             individual_tweet_file.write('<body><div class="tweet_list">')
             adjusted_html = output_html.replace("images/avatars", "../images/avatars")

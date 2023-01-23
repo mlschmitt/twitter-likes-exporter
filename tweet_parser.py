@@ -13,7 +13,6 @@ class TweetParser():
             self.is_valid_tweet = False
 
     def tweet_as_json(self):
-        print(self.tweet_created_at)
         return {
             "tweet_id": self.tweet_id,
             "user_id": self.user_id,
