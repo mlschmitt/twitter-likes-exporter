@@ -128,4 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Vim swap files
+.*.sw*
+
 liked_tweets.json
+config.json
+tweet_likes_html
