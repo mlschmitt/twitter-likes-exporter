@@ -22,10 +22,11 @@ pip install -r requirements.txt
 2. Navigate to `https://twitter.com/<your_user_handle>/likes`
 3. Look for a network request to an `api.twitter.com` domain path ending in `/Likes` (you can type `/likes` in the filter box at the top left of the debug console). You need to find `userId`, `authorization`, `cookie` and `x-csrf-token` values from the network request and fill the corresponding fields in `config.json`.
 4. From the request headers, copy paste the following details (you can right click on the request and select `Copy` `>` `Copy as cURL` and paste into an editor window for the ease of finding these details):
-    a. Copy the `Authorization` value (find it as `authorization: Bearer xxx`) and save as `HEADER_AUTHORIZATION` in `config.json`
-    b. Copy the `Cookies` value (find it as `cookie: xxx`) and save as `HEADER_COOKIES` in `config.json`. Note that while pasting cookie value, you would need to escape any existing double quotes by prefixing them with a backslash (`\`).
-    c. Copy the `x-csrf-token` (find it as `x-csrf-token: xxx`) value and save as `HEADER_CSRF` in `config.json`
-5. Find your Twitter user ID (available in the `/Likes` request params, or elsewhere) and save as `USER_ID` in `config.json`. If you click on Payload tab, you may find something like `"userId": "xxx"`, where `xxx` is your numeric user ID.
+    - Copy the `Authorization` value (find it as `authorization: Bearer xxx`) and save as `HEADER_AUTHORIZATION` in `config.json`
+    - Copy the `Cookies` value (find it as `cookie: xxx`) and save as `HEADER_COOKIES` in `config.json`. Note that while pasting cookie value, you would need to escape any existing double quotes by prefixing them with a backslash (`\`).
+    - Copy the `x-csrf-token` (find it as `x-csrf-token: xxx`) value and save as `HEADER_CSRF` in `config.json`
+   
+6. Find your Twitter user ID (available in the `/Likes` request params, or elsewhere) and save as `USER_ID` in `config.json`. If you click on Payload tab, you may find something like `"userId": "xxx"`, where `xxx` is your numeric user ID.
 
 
 ### Download Likes to JSON
