@@ -2,6 +2,7 @@ import datetime
 import json
 import os
 import requests
+from pathlib import Path
 
 class ParseTweetsJSONtoHTML():
     def __init__(self):
@@ -30,7 +31,7 @@ class ParseTweetsJSONtoHTML():
 
         if self.download_images:
             user_image_src = f'images/avatars/{tweet_data["user_id"]}.jpg'
-            full_path = f"{self.output_html_directory}/{user_image_src}"
+            full_path = Path(self.output_html_directory, user_image_src)
             self.save_remote_image(tweet_data["user_avatar_url"], full_path)
         else:
             user_image_src = tweet_data["user_avatar_url"]
@@ -51,7 +52,7 @@ class ParseTweetsJSONtoHTML():
                 if self.download_images:
                     media_name = media_url.split("/")[-1]
                     user_image_path = f'images/tweets/{media_name}'
-                    full_path = f"{self.output_html_directory}/{user_image_path}"
+                    full_path = Path(self.output_html_directory, user_image_path)
                     self.save_remote_image(media_url, full_path)
                 else:
                     user_image_path = media_url
@@ -63,14 +64,15 @@ class ParseTweetsJSONtoHTML():
         output_html += f"<div class='tweet_created_at'>{parsed_datetime.strftime('%m/%d/%Y %I:%M%p')}</div>"
         output_html += "<div class='twitter_link'>"
         output_html += f"<a href='https://www.twitter.com/{tweet_data['user_handle']}/status/{tweet_data['tweet_id']}/' target='_blank'>Original tweet &#8599;</a> &#8226; "
-        individual_tweet_file_path = f"{self.output_html_directory}/tweets/{tweet_data['tweet_id']}.html"
+        individual_tweet_file_path = Path(self.output_html_directory, "tweets", f"{tweet_data['tweet_id']}.html")
         output_html += f"<a href='tweets/{tweet_data['tweet_id']}.html' target='_blank'>Local version</a>"
         output_html += "</div>"
 
         output_html += "</div>\n\n"
 
         
-        with open(individual_tweet_file_path, 'w') as individual_tweet_file:
+        individual_tweet_file_path.parent.mkdir(parents=True, exist_ok=True)
+        with individual_tweet_file_path.open('w') as individual_tweet_file:
             individual_tweet_file.write('<html><head>')
             individual_tweet_file.write('<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0" />')
             individual_tweet_file.write('<title>Liked Tweets Export</title>')
@@ -88,7 +90,8 @@ class ParseTweetsJSONtoHTML():
             return
         print(f"Downloading image {remote_url}...")
         img_data = requests.get(remote_url).content
-        with open(local_path, 'wb') as handler:
+        local_path.parent.mkdir(parents=True, exist_ok=True)
+        with local_path.open('wb') as handler:
             handler.write(img_data)
 
     def parse_text_for_html(self,input_text):
@@ -96,13 +99,13 @@ class ParseTweetsJSONtoHTML():
 
     @property
     def output_index_path(self):
-        return f'{self.output_html_directory}/index.html'
+        return Path(self.output_html_directory, "index.html")
 
     @property
     def output_html_directory(self):
         if not self._output_html_directory:
             script_dir = os.path.dirname(__file__)
-            self._output_html_directory = os.path.join(script_dir, 'tweet_likes_html')
+            self._output_html_directory = Path(script_dir, "tweet_likes_html")
         return self._output_html_directory
 
     @property
